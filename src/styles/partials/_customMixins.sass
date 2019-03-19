@@ -1,0 +1,207 @@
+=background ( $colour, $opacity: 1 )
+	background-color: $colour
+	background-color: rgba( $colour, $opacity )
+
+=keyframe($name)
+	@-webkit-keyframes #{$name}
+		@content
+	@-moz-keyframes #{$name}
+		@content
+	@-ms-keyframes #{$name}
+		@content
+	@keyframes #{$name}
+		@content
+
+=animation ($animation, $duration:1000ms, $timingFunction:ease, $delay:0, $iteration:infinite, $direction:running ) 
+	-webkit-animation-name: $animation
+	-webkit-animation-duration: $duration
+	-webkit-animation-timing-function: $timingFunction
+	-webkit-animation-delay: $delay
+	-webkit-animation-duration: $duration
+	-webkit-animation-iteration-count: $iteration
+	-webkit-animation-direction: $direction
+
+	-moz-animation-name: $animation
+	-moz-animation-duration: $duration
+	-moz-animation-timing-function: $timingFunction
+	-moz-animation-delay: $delay
+	-moz-animation-duration: $duration
+	-moz-animation-iteration-count: $iteration
+	-moz-animation-direction: $direction
+
+	animation-name: $animation
+	animation-duration: $duration
+	animation-timing-function: $timingFunction
+	animation-delay: $delay
+	animation-duration: $duration
+	animation-iteration-count: $iteration
+	animation-direction: $direction
+
+
+=hyphens
+	-ms-word-break: break-all
+	word-break: break-all
+
+	// Non standard for webkit
+	word-break: break-word
+
+	-webkit-hyphens: auto
+	-moz-hyphens: auto
+	-ms-hyphens: auto
+	hyphens: auto
+	text-align: justify
+
+// Put this on the parent
+=clearfix
+	&:after
+		visibility: hidden
+		display: block
+		font-size: 0
+		content: " "
+		clear: both
+		height: 0
+
+=overflow-touch
+	-ms-overflow-style: none
+	-webkit-overflow-scrolling: touch
+	overflow-y: auto
+
+=css-select( $colour, $background )
+	::selection
+		color: $colour
+		background: $background
+	::-moz-selection
+		color: $colour
+		background: $background
+
+
+=placeholder-text( $colour )
+	&::-webkit-input-placeholder
+		color: $colour
+	&::-moz-placeholder
+		color: $colour
+	&:-ms-input-placeholder
+		color: $colour
+	&:-moz-placeholder
+		color: $colour
+
+=no-select
+	-webkit-touch-callout: none
+	-webkit-user-select: none
+	-webkit-tap-highlight-color: rgba(0,0,0,0)
+	-webkit-tap-highlight-color: transparent
+	-moz-user-select: none
+	-khtml-user-select: none
+	-webkit-user-select: none
+	-ms-user-select: none
+	user-select: none
+
+=font-smoothing
+	text-rendering: optimizeLegibility
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
+
+
+=translate-center ($type:vertical,$position:absolute,$xOffset: 0, $yOffset: 0)
+	position: $position
+	@if $type == 'none'
+		transform: none
+		right: auto
+		position: static
+	@else if $type == 'horizontal'
+		transform: translateX(50%)
+		@if $xOffset != 0
+			right: calc(50% - #{$xOffset})
+		@else
+			right: 50%
+	@else if $type == 'vertical'
+		transform: translateY(50%)
+		@if $yOffset != 0
+			bottom: calc(50% - #{$yOffset})
+		@else
+			bottom: 50%
+	@else
+		transform: translate(50%,50%)
+		@if $xOffset != 0
+			right: calc(50% - #{$xOffset})
+		@else
+			right: 50%
+		@if $yOffset != 0
+			bottom: calc(50% - #{$yOffset})
+		@else
+			bottom: 50%
+
+=calc($property, $expression)
+	#{$property}: -webkit-calc(#{$expression})
+	#{$property}: calc(#{$expression})
+
+=backface-hidden
+	backface-visibility: hidden
+	-webkit-backface-visibility: hidden
+
+=form-reset
+	box-sizing: border-box
+	background-clip: padding-box
+	border-radius: 0
+	-moz-appearance: none
+	-webkit-appearance: none
+	appearance: none
+	color: #000
+	border: 0
+	margin: 0
+	padding: 0
+	background: none
+	outline: 0
+	resize: none
+	display: block
+
+=placeholder
+	&::-webkit-input-placeholder
+		@content
+	&:-moz-placeholder
+		@content
+	&::-moz-placeholder
+		@content
+	&:-ms-input-placeholder
+		@content
+
+=retina-screen
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
+		@content
+
+=portrait-screen
+	@media screen and (max-aspect-ratio: 101/100)
+		@content
+
+// iOS 7 fix for viewport units
+// see here: https://gist.github.com/BenMorel/e9e34c08360ebbbd0634
+// As an example, replace:
+//   height: 50vh;
+//   font-size: 5vmin;
+// with:
+//   @include viewport-unit(height, 50vh);
+//   @include viewport-unit(font-size, 5vmin);
+
+=viewport-unit($property, $value)
+	#{$property}: $value
+	$unit: unit($value)
+	@if index((vw, vh, vmin, vmax), $unit) != null
+		$devices: (768px, 1024px), (320px, 480px), (320px, 568px)
+		@each $device in $devices
+			$device-width: nth($device, 1)
+			$device-height: nth($device, 2)
+			$device-query: "only screen and (-webkit-min-device-pixel-ratio: 1)"
+			$device-query: "#{$device-query} and (device-width: #{$device-width})"
+			$device-query: "#{$device-query} and (device-height: #{$device-height})"
+			$percent: $value / ($value * 0 + 1)
+			// see https://github.com/sass/sass/issues/533
+			$percent-width: $device-width * $percent / 100
+			$percent-height: $device-height * $percent / 100
+			@if $unit == vmin or $unit == vmax
+				@media #{$device-query}
+					#{$property}: if($unit == vmin, $percent-width, $percent-height)
+			@else
+				@media #{$device-query} and (orientation: portrait)
+					#{$property}: if($unit == vw, $percent-width, $percent-height)
+				@media #{$device-query} and (orientation: landscape)
+					#{$property}: if($unit == vw, $percent-height, $percent-width)

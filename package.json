@@ -1,0 +1,52 @@
+{
+  "name": "gatsby-three-js",
+  "private": false,
+  "description": "Boilerplate gatsby site to work with three.js",
+  "version": "0.1.0",
+  "author": "Ben Elwyn <ben@elwyn.co>",
+  "dependencies": {
+    "babel-preset-stage-1": "^6.24.1",
+    "current-device": "^0.8.0",
+    "gatsby": "^2.0.76",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-manifest": "^2.0.9",
+    "gatsby-plugin-offline": "^2.0.16",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sass": "^2.0.9",
+    "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-source-filesystem": "^2.0.8",
+    "gatsby-transformer-sharp": "^2.1.8",
+    "gatsby-transformer-yaml": "^2.1.7",
+    "gsap": "^2.0.2",
+    "loadjs": "^3.5.5",
+    "lodash": "^4.17.11",
+    "mousetrap": "^1.6.2",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-sizes": "^1.0.4",
+    "react-transition-group": "^2.5.3",
+    "three": "^0.101.1",
+    "three-dat.gui": "^1.0.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "gatsby develop -H $HOSTNAME -p 8000",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.12.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-babel": "^5.3.0",
+    "prettier": "^1.15.2"
+  }
+}

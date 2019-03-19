@@ -1,0 +1,130 @@
+@mixin font-face( $name ) {
+	@font-face {
+		font-family: quote($name);
+		src: url('./fonts/#{ $name }.eot?') format('eot'), url('./fonts/#{ $name }.woff') format('woff'), url('./fonts/#{ $name }.ttf') format('truetype');	
+	}
+}
+
+@include font-face( GT-Haptik-Light-2 );
+// @include font-face( GT-Haptik-Light-Oblique-2 );
+// @include font-face( GT-Haptik-Medium-2 );
+// @include font-face( GT-Haptik-Medium-Oblique-2 );
+
+@mixin regular {
+	font-family: 'GT-Haptik-Light-2';
+}
+
+@mixin italic {
+	font-family: 'GT-Haptik-Light-Oblique-2';
+}
+
+@mixin bold {
+	font-family: 'GT-Haptik-Medium-2';
+}
+
+@mixin bold-italic {
+	font-family: 'GT-Haptik-Medium-Oblique-2';
+}
+
+// FONT STYLING MIXINS
+@mixin letter-spacing ($value) {
+	letter-spacing: ($value / 1000)+em;
+}
+
+@mixin font-size ($value,$ratio:1) {
+	font-size: $value * $ratio;
+}
+
+@mixin line-height ($value,$ratio:1) {
+	line-height: $value * $ratio;
+}
+
+// ---------------------------------------------------------
+// Function for converting em to px
+// ---------------------------------------------------------
+// See: http://vvv.tobiassjosten.net/css/px-to-em-with-sass/
+// Usage, eg:
+
+	// .title {
+	//     font-size: em(37px);
+	// }
+
+@function em($px, $base: $baseFontSize) {
+    @return ($px / $base) * 1em;
+}
+
+// -------------------------------------------------------
+
+// Typography
+// //////////
+
+// Set the base font size
+// Used to calcuate ems
+$baseFontSize: 19;
+
+* {
+	font-style: normal;
+	// font-weight: normal;
+}
+
+
+// FONT SIZE MIXINS
+
+
+
+// DEFINE FONT STYLES
+body {
+	@include regular;
+    color: $black;
+	font-size: $baseFontSize + px;
+	line-height: 1.4em;
+
+    @include max-screen (1100px) {
+        font-size: ($baseFontSize - 1) + px;
+    }
+    
+}
+
+em, i {
+	@include italic;
+}
+
+strong, b {
+	@include bold;
+}
+
+em b,
+b em,
+i b,
+b i,
+strong em,
+em strong {
+	@include bold-italic;	
+}
+
+@mixin top-links-text {
+    @include serif;    
+    font-size: 1.3em;
+
+    @include max-screen ( 1200px ) {
+        font-size: 1.2em;        
+    }
+    
+}
+
+@mixin footer-text {
+    @include serif;
+    font-size: 0.85em;
+}
+
+@mixin small-text {
+    font-size: 0.65em;
+    line-height: 1.3em;
+}
+
+@mixin page-heading {
+    font-size: 1.5em;
+    line-height: 1.33em;
+    padding-top: 0.5em;
+    // @include bold;    
+}

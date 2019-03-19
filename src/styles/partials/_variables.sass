@@ -1,0 +1,60 @@
+// COLOURS
+$white: white
+$paleWhite: rgb(255, 255, 250)
+$black: lighten(black, 10)
+
+$red: red
+$yellow: yellow
+$blue: #4C50FF
+
+$green: rgb(6, 104, 78)
+$lightGreen: rgb(203, 222, 213)
+
+
+// STRUCTURE
+$gutter: 25px
+$thumbContainerWidth: 150px
+
+$maxThumb: 80px
+
+// BREAKPOINTS
+$mobileWidth: 568px
+=mobile-width
+	+max-screen ( $mobileWidth )
+		@content
+// Z-INDEXES
+
+// CUSTOM MIXINS
+=default-link( $underline: false, $color: $blue )
+	a
+		@if $underline
+			text-decoration: underline
+		&:hover
+			.no-touchevents &
+				color: $color
+
+=restrict-width( $width: $maxWidth, $isPositioned: false )
+	width: 100%
+	margin: 0 auto
+	max-width: $width
+	padding-left: $gutter
+	padding-right: $gutter
+	+min-screen( $width + ($gutter * 2) )
+		padding-left: 0
+		padding-right: 0
+
+	@if $isPositioned
+		+min-screen( $maxWidth )
+			left: 50%
+			margin-left: $maxWidth / -2
+
+	+gutter-shrink
+		padding-left: $gutterSmall
+		padding-right: $gutterSmall
+
+	+gutter-mobile
+		padding-left: $gutterMobile
+		padding-right: $gutterMobile
+
+// CUSTOM EASINGS
+$bounce: cubic-bezier(.49,.64,.15,1.4)

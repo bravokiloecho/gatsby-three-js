@@ -1,0 +1,195 @@
+@include css-select ($white,$black);
+
+body,html,#wrapper,#___gatsby,div[role="group"][tabindex] {
+	width: 100%;
+	height: 100%;
+	&.no-scroll {
+		overflow: hidden;
+	}
+}
+
+// div[role="group"][tabindex] {
+//   flex: 1;
+//   // Other rules that don't break a11y 😊
+// }
+
+body:fullscreen {
+	#wrapper {
+	    background-color: $white;
+	}
+}
+body:-webkit-full-screen {
+    #wrapper {
+        background-color: $white;
+    }
+}
+body:-moz-full-screen {
+    #wrapper {
+        background-color: $white;
+    }
+}
+
+#wrapper {
+	position: relative;
+
+	.overview-mode & {
+		overflow: hidden;
+	}
+
+	&.ready {
+		opacity: 1;
+	}
+	
+	// opacity: 0;
+	// display: none;
+	// transition: opacity 150ms ease;
+	
+}
+
+* {
+	box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    outline: 0;
+    -webkit-text-size-adjust: 100%;
+}
+
+figure {
+	line-height: 0;
+}
+
+input[type="submit"], button, .button {
+	cursor: pointer;
+	@include no-select;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+img {
+	@include no-select;
+}
+
+// Fix overflow bug on IE9
+svg:not(:root) { overflow: hidden; }
+
+.svg {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.clear {
+	display: block;
+	float: left;
+	clear: both;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+
+// SCROLLBAR STYLING
+$scrollbarWidth: 10px;
+$scrollbarBackground: $white;
+$scrollbarHandleColour: $black;
+
+
+.no-touchevents {
+	::-webkit-scrollbar {
+		width: $scrollbarWidth;
+	}
+
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 0px $scrollbarBackground;
+		-webkit-border-radius: 0px;
+		border-radius: 0px;
+		background: $scrollbarBackground;
+	}
+
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+	    -webkit-border-radius: 0px;
+	    border-radius: 0px;
+		background: $scrollbarHandleColour;
+	    -webkit-box-shadow: inset 0 0 0px $scrollbarHandleColour; 
+	}
+
+	::-webkit-scrollbar-button { }
+	::-webkit-scrollbar-track-piece { }
+	::-webkit-scrollbar-corner { }
+	::-webkit-resizer { }
+}
+
+// MISC GLOBAL ELEMENTS
+// -------------------------------------
+.image-cover-background {
+	-moz-background-size: cover !important;
+	-o-background-size: cover !important;
+	-webkit-background-size: cover !important;
+	background-size: cover !important;
+	background-position: 50% 50% !important;
+	background-repeat: no-repeat;
+
+	&.crop-middle {
+		background-position: 50% 50% !important;
+	}
+
+	&.crop-top {
+		background-position: 50% 0% !important;
+	}
+
+	&.crop-bottom {
+		background-position: 50% 100% !important;
+	}
+
+	&.portrait {
+		-moz-background-size: contain !important;
+		-o-background-size: contain !important;
+		-webkit-background-size: contain !important;
+		background-size: contain !important;
+		background-position: 0% 50% !important;
+	}
+
+	>img {
+		display: none;
+	}
+}
+
+.text-block {
+	>* {
+		margin-bottom: 1em;
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	ul { 
+	   list-style-type: disc; 
+	   list-style-position: inside; 
+	}
+
+	ol { 
+	   list-style-type: decimal; 
+	   list-style-position: inside; 
+	}
+	
+	ul ul, ol ul { 
+	   list-style-type: circle; 
+	   list-style-position: inside; 
+	   margin-left: 1em; 
+	}
+	
+	ol ol, ul ol { 
+	   list-style-type: lower-latin; 
+	   list-style-position: inside; 
+	   margin-left: 1em; 
+	}
+}

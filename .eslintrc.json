@@ -1,0 +1,35 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "globals": {
+      "document": true,
+      "THREE": true,
+      "window": true,
+      "require": true,
+      "process": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true,
+            "globalReturn": false
+        }
+    },
+    "plugins": [
+        "react", "import", "babel"
+    ],
+    "rules": {
+        "semi": 2,
+        "no-console": "off"
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ]
+}
