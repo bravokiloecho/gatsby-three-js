@@ -40,7 +40,7 @@
     "develop": "gatsby develop",
     "start": "gatsby develop -H $HOSTNAME -p 8000",
     "format": "prettier --write \"src/**/*.js\"",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
